@@ -10,6 +10,8 @@ const PORT = 3000;
 mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    ssl: true, // Ensure SSL is enabled
+    sslValidate: false, // Disable SSL certificate validation
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
