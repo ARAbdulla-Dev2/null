@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -151,6 +152,14 @@ app.get('/api/users', async (req, res) => {
             limit: newUser.limit,
         },
     });
+});
+
+// Middleware to serve static files
+app.use(express.static('pages')); // Assuming the `signup.html` file is in the `pages` folder
+
+// Route to serve the signup page
+app.get('/signup', (req, res) => {
+    res.sendFile(__dirname + '/pages/signup.html');
 });
 
 // Start the server
